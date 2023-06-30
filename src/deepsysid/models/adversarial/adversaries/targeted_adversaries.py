@@ -6,8 +6,7 @@ import torch.nn as nn
 from deepsysid.models.adversarial.adversaries.base_adversary import Adversary
 from deepsysid.models.recurrent import LSTMInitModel
 
-device = 'cpu'
-
+device = torch.device('cpu')
 
 class TargetedFgsm(Adversary):
     def __init__(
@@ -28,6 +27,7 @@ class TargetedFgsm(Adversary):
     ):
         '''
         Performs FGSM with the given sequences.
+        Only one target variable is being attacked.
         Expects normalized sequences as input.
         '''
 
@@ -85,6 +85,7 @@ class TargetedPgd(Adversary):
         This is achieved by performing FGSM multiple times.
         If the adversarial example leaves the search space, defined by epsilon, during the updates,
         then it is projected back into it.
+        Only one target variable is being attacked.
         Expects normalized sequences as input.
         '''
 
@@ -168,6 +169,7 @@ class TargetedPgdRR(Adversary):
         '''
         Performs PGD with random restarts with the given sequences.
         This is achieved by performing PGD multiple times on multiple randomly initialized perturbed control sequences.
+        Only one target variable is being attacked.
         Expects normalized sequences as input.
         '''
 

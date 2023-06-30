@@ -6,8 +6,7 @@ import torch.nn as nn
 from deepsysid.models.adversarial.adversaries.base_adversary import Adversary
 from deepsysid.models.recurrent import LSTMInitModel
 
-device = 'cpu'
-
+device = torch.device('cpu')
 
 class SubseqFgsm(Adversary):
     def __init__(
@@ -61,6 +60,7 @@ class SubseqFgsm(Adversary):
         # Perturbing the subsequence by taking a step in the direction of its gradient.
         grad = control_subseq.grad.squeeze()
         advex_subseq = control_subseq + (self.step_size * grad.sign())
+
         advex = torch.concat((
             control_left,
             advex_subseq,

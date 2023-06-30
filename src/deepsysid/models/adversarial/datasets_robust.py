@@ -96,7 +96,8 @@ class RobustPredictorDataset(data.Dataset[Dict[str, NDArray[np.float64]]]):
                         current_x0.float().to('cpu'), return_state=True
                     )
 
-                    strongest_advex, _ = current_pgd_rr.attack(current_x, current_y, hx)
+                    advexs = current_pgd_rr.attack(current_x, current_y, hx)
+                    strongest_advex = advexs[0][0]
 
                     x_adv[idx, :, :] = strongest_advex.detach().numpy()
 

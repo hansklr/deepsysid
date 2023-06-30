@@ -6,8 +6,7 @@ import torch.nn as nn
 from deepsysid.models.adversarial.adversaries.base_adversary import Adversary
 from deepsysid.models.recurrent import LSTMInitModel
 
-device = 'cpu'
-
+device = torch.device('cpu')
 
 class Fgsm(Adversary):
     def __init__(
